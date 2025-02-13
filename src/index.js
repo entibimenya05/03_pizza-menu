@@ -56,7 +56,7 @@ function App() {
   );
 }
 function Header() {
-  const style = { color: "red", fontSize: "48", textTransform: "upperCase" };
+  // const style = { color: "red", fontSize: "48", textTransform: "upperCase" };
   return (
     //styling using inline stylinin //first use style= then enter the
     //  javascript mode by {} then another {} for creating and object //font-size
@@ -76,14 +76,40 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      {/*
+passing and receiving props:1. we pass the props into the component 2. then we receive the props into the component*/}
+      <Pizza
+        //1. pass the props into the component
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        //to pass the number as number we do it by entering javascript mode not as ""
+        price={10}
+      />
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mozarella, mushrooms, and onion"
+        price={12}
+        photoName="pizzas/funghi.jpg"
+        soldOut="false"
+      />
     </main>
+  );
+}
+//2. we receive the props inside the child component
+function Pizza(props) {
+  console.log(props);
+  return (
+    <div className="pizza">
+      {/*Now we use these values by entering javascript mode*/}
+      <img src={props.photoName} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+
+        <p>{props.ingredients}</p>
+        <span>{props.price + 3}</span>
+      </div>
+    </div>
   );
 }
 function Footer() {
@@ -101,15 +127,7 @@ function Footer() {
     </footer>
   );
 }
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza spinaci" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
-  );
-}
+
 //React v18
 const root = ReactDom.createRoot(document.getElementById("root"));
 
