@@ -73,20 +73,27 @@ function Header() {
   );
 }
 function Menu() {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const numPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
       {/*rendering a list*/}
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza
-            //name={pizza.name} photoName={pizza.photoName}
-            // this not how we want it instead we pass in a pizzaObject and then we can access the information we want out of the object
-            pizzaObj={pizza}
-            key={pizza.name}
-          />
-        ))}
-      </ul>
+      {/*conditional rendering;we only want to render the list of pizzas only if there are pizzas present*/}
+
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza
+              //name={pizza.name} photoName={pizza.photoName}
+              // this not how we want it instead we pass in a pizzaObject and then we can access the information we want out of the object
+              pizzaObj={pizza}
+              key={pizza.name}
+            />
+          ))}
+        </ul>
+      )}
       {/*
 passing and receiving props:1. we pass the props into the component 2. then we receive the props into the component*/}
       {/*  <Pizza
@@ -135,7 +142,15 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}. We are currently open
+      {/* the && opoertor*/}
+      {isOpen && (
+        <div className="order">
+          <p>We're open until {closeHour} :00. Come visit us or order online</p>
+          <button className="btn">Order Now</button>
+        </div>
+      )}
+
+      {/*{new Date().toLocaleTimeString()}. We are currently open*/}
     </footer>
   );
 }
