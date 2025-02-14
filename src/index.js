@@ -131,7 +131,12 @@ passing and receiving props:1. we pass the props into the component 2. then we r
 }
 //2. we receive the props inside the child component
 function Pizza(props) {
-  console.log(props);
+  //returning multiple returns
+  //notice we are out of the jsx with the if condition
+  //what is important here, these two returns can not happen at the same time
+  //but this not what we really want, we want to return a component not a piece of JSX
+
+  if (props.pizzaObj.soldOut) return null;
   return (
     <li className="pizza">
       {/*Now we use these values by entering javascript mode
@@ -146,15 +151,32 @@ function Pizza(props) {
     </li>
   );
 }
-function Footer() {
+function Footer(props) {
   const hour = new Date().getHours();
   const openHour = 12;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   //   if (hour >= openHour && hour <= closeHour) alert("W're currently open!");
   //   else alert("Sorry w're closed!");
-  console.log(isOpen);
 
+  //returning multiple returns
+  //notice we are out of the jsx with the if condition
+  //what is important here, these two returns can not happen at the same time
+  //but this not what we really want, we want to return a component not a piece of JSX
+
+  {
+    /*if (!isOpen)
+    return (
+      <p>
+        <p>
+          We're happy to welcome you between {openHour} :00 and {closeHour} :00
+        </p>
+      </p>
+    );*/
+  }
+  //so see: if (props.pizzaObj.soldOut) return null;
+
+  //else if it is open return the message below
   return (
     <footer className="footer">
       {/* the && opoertor*/}
@@ -165,7 +187,6 @@ function Footer() {
         </div>
       ) : (
         <p>
-          {" "}
           We're happy to welcome you between {openHour} :00 and {closeHour} :00
         </p>
       )}
