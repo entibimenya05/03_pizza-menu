@@ -76,9 +76,20 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
+      {/*rendering a list*/}
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza
+            //name={pizza.name} photoName={pizza.photoName}
+            // this not how we want it instead we pass in a pizzaObject and then we can access the information we want out of the object
+            pizzaObj={pizza}
+            key={pizza.name}
+          />
+        ))}
+      </ul>
       {/*
 passing and receiving props:1. we pass the props into the component 2. then we receive the props into the component*/}
-      <Pizza
+      {/*  <Pizza
         //1. pass the props into the component
         name="Pizza Spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
@@ -92,7 +103,7 @@ passing and receiving props:1. we pass the props into the component 2. then we r
         price={12}
         photoName="pizzas/funghi.jpg"
         soldOut="false"
-      />
+      />*/}
     </main>
   );
 }
@@ -100,16 +111,17 @@ passing and receiving props:1. we pass the props into the component 2. then we r
 function Pizza(props) {
   console.log(props);
   return (
-    <div className="pizza">
-      {/*Now we use these values by entering javascript mode*/}
-      <img src={props.photoName} alt={props.name} />
+    <li className="pizza">
+      {/*Now we use these values by entering javascript mode
+      //also adapt our props to reflect pizzaObj*/}
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
+        <h3>{props.pizzaObj.name}</h3>
 
-        <p>{props.ingredients}</p>
-        <span>{props.price + 3}</span>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price + 3}</span>
       </div>
-    </div>
+    </li>
   );
 }
 function Footer() {
