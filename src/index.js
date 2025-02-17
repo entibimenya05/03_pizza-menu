@@ -79,6 +79,7 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
+
       {/*rendering a list*/}
       {/*conditional rendering;we only want to render the list of pizzas only if there are pizzas present*/}
 
@@ -96,16 +97,24 @@ function Menu() {
       )}*/}
       {/*ternary operator*/}
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza
-              //name={pizza.name} photoName={pizza.photoName}
-              // this not how we want it instead we pass in a pizzaObject and then we can access the information we want out of the object
-              pizzaObj={pizza}
-              key={pizza.name}
-            />
-          ))}
-        </ul>
+        //react fragment lets us group some elements without leaving any trace in the html tree so in the DOM
+        //we always go for the short version : <></> only go for the one below if you need a key
+        <React.Fragment key="anything">
+          <p>
+            Authentic Italian Cuisine. 6 creative dishes to choose from. All
+            from our stone overall organically delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza
+                //name={pizza.name} photoName={pizza.photoName}
+                // this not how we want it instead we pass in a pizzaObject and then we can access the information we want out of the object
+                pizzaObj={pizza}
+                key={pizza.name}
+              />
+            ))}
+          </ul>
+        </React.Fragment>
       ) : (
         <p>We're still working on our menu. Please come back later.</p>
       )}
