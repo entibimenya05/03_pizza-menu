@@ -155,6 +155,7 @@ function Footer(props) {
   const hour = new Date().getHours();
   const openHour = 12;
   const closeHour = 22;
+
   const isOpen = hour >= openHour && hour <= closeHour;
   //   if (hour >= openHour && hour <= closeHour) alert("W're currently open!");
   //   else alert("Sorry w're closed!");
@@ -181,10 +182,7 @@ function Footer(props) {
     <footer className="footer">
       {/* the && opoertor*/}
       {isOpen ? (
-        <div className="order">
-          <p>We're open until {closeHour} :00. Come visit us or order online</p>
-          <button className="btn">Order Now</button>
-        </div>
+        <Order closeHour={closeHour} />
       ) : (
         <p>
           We're happy to welcome you between {openHour} :00 and {closeHour} :00
@@ -195,7 +193,16 @@ function Footer(props) {
     </footer>
   );
 }
-
+function Order(props) {
+  return (
+    <div className="order">
+      <p>
+        We're open until {props.closeHour} :00. Come visit us or order online
+      </p>
+      <button className="btn">Order Now</button>
+    </div>
+  );
+}
 //React v18
 const root = ReactDom.createRoot(document.getElementById("root"));
 
