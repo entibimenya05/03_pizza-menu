@@ -130,28 +130,29 @@ passing and receiving props:1. we pass the props into the component 2. then we r
   );
 }
 //2. we receive the props inside the child component
-function Pizza(props) {
+//Destructuring:never forget to use {} when destructuring
+function Pizza({ pizzaObj }) {
   //returning multiple returns
   //notice we are out of the jsx with the if condition
   //what is important here, these two returns can not happen at the same time
   //but this not what we really want, we want to return a component not a piece of JSX
 
-  if (props.pizzaObj.soldOut) return null;
+  if (pizzaObj.soldOut) return null;
   return (
     <li className="pizza">
       {/*Now we use these values by entering javascript mode
       //also adapt our props to reflect pizzaObj*/}
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
+        <h3>{pizzaObj.name}</h3>
 
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price + 3}</span>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price + 3}</span>
       </div>
     </li>
   );
 }
-function Footer(props) {
+function Footer() {
   const hour = new Date().getHours();
   const openHour = 12;
   const closeHour = 22;
@@ -182,7 +183,7 @@ function Footer(props) {
     <footer className="footer">
       {/* the && opoertor*/}
       {isOpen ? (
-        <Order closeHour={closeHour} />
+        <Order closeHour={closeHour} openHour={openHour} />
       ) : (
         <p>
           We're happy to welcome you between {openHour} :00 and {closeHour} :00
@@ -193,11 +194,12 @@ function Footer(props) {
     </footer>
   );
 }
-function Order(props) {
+function Order({ closeHour, openHour }) {
   return (
     <div className="order">
       <p>
-        We're open until {props.closeHour} :00. Come visit us or order online
+        We're open from {openHour} :00 until {closeHour} :00. Come visit us or
+        order online
       </p>
       <button className="btn">Order Now</button>
     </div>
