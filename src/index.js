@@ -145,10 +145,11 @@ function Pizza({ pizzaObj }) {
   //notice we are out of the jsx with the if condition
   //what is important here, these two returns can not happen at the same time
   //but this not what we really want, we want to return a component not a piece of JSX
-
-  if (pizzaObj.soldOut) return null;
+  //let's render the below with a ternary operator at line 160
+  //if (pizzaObj.soldOut) return null;
   return (
-    <li className="pizza">
+    //using a className pizza sold-out using a template literal and a ternary operator
+    <li className={`pizza ${pizzaObj.soldOut ? "Sold Out" : ""}`}>
       {/*Now we use these values by entering javascript mode
       //also adapt our props to reflect pizzaObj*/}
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
@@ -156,7 +157,8 @@ function Pizza({ pizzaObj }) {
         <h3>{pizzaObj.name}</h3>
 
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price + 3}</span>
+        {/*rendering some text conditionally using ternary operator*/}
+        <span>{pizzaObj.soldOut ? "Sold out" : pizzaObj.price + 3}</span>
       </div>
     </li>
   );
